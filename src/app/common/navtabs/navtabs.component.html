@@ -1,0 +1,3 @@
+<nav class="nav nav-pills nav-fill">
+    <a *ngFor="let tab of tabs" class="nav-item nav-link" [ngClass]="{'active' : isCurrentStep(tab)}" href="#">{{tab}}</a>
+</nav>

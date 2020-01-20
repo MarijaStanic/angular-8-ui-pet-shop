@@ -1,1 +1,32 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  height: 100%;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  background-color: #92c8ad;
+}
+
+.custom-container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #eae7e7;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 0 30px black;
+}
+
+/************** Forms **************/
+
+ 
+.ng-invalid .ng-touched:not(form) {
+  border-left: 5px solid #a94442;
+}
+
+.custom-width {
+  width: 50%;
+}
+
+.table-container {
+	padding-left: 20px;
+}
+
+ 

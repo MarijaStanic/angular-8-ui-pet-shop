@@ -1,0 +1,22 @@
+<div class="card card-block custom-container">
+    <nav class="navbar navbar-light bg-light">
+        <button class="btn btn-secondary" (click)="open()">Add New Customer</button>
+    </nav>
+
+    <form>
+        <div class="form-group form-inline">
+            Search: <input class="form-control ml-2" type="text" [formControl]="filter" name="search" />
+        </div>
+    </form>
+
+    <div app-table
+        [headers]="['First Name', 'Last Name', 'Birthdate', 'Email', 'Home Phone', 'Mobile Phone', 'Address']">
+        <tr customer-row *ngFor="let customer of customers$ | async; index as i" [customer]="customer"
+            [filterValue]="filter.value" (click)="selectCustomer(customer)">
+            <td><button class="btn btn-secondary" (click)="open(customer)">Edit</button></td>
+        </tr>
+    </div>
+
+</div>
+
+<template ngbModalContainer></template> <!-- give the Modal service a place to render the component -->

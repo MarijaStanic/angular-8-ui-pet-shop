@@ -1,0 +1,72 @@
+<div class="card card-block custom-container">
+        <nav class="navbar navbar-light bg-light">
+                <navtabs [tabs]="['One', 'Two']" #navtabs></navtabs>
+        </nav>
+        <div [hidden]="!navtabs.isCurrentStep('One')">
+                <div class="row">
+                        <div class="col-xl-6">
+                                <div class="card mt-2">
+                                        <div class="card-body">
+                                                <h5 class="card-title">Stocks</h5>
+                                                <form #form="ngForm">
+                                                        <div app-table
+                                                                [headers]="['Name', 'Price', 'Type', 'Quantity', 'Sales Unit']">
+                                                                <tr stock-row *ngFor="let stock of stocks; index as i"
+                                                                        [stock]="stock">
+                                                                        <td>
+                                                                                <div class="form-group">
+                                                                                        <input class="form-control custom-width"
+                                                                                                type="number"
+                                                                                                placeholder="#"
+                                                                                                name="orderedQuantity_{{i}}"
+                                                                                                [(ngModel)]="orderedQuantity[i]"
+                                                                                                #quantity="ngModel">
+                                                                                </div>
+                                                                                <div class="text-danger"
+                                                                                        *ngIf="quantity.invalid">
+                                                                                        {{errorMessage}}
+                                                                                </div>
+                                                                                <button class="btn btn-success custom-width"
+                                                                                        (click)="addToOrder(stock, i, quantity)">Add</button>
+
+                                                                        </td>
+                                                                </tr>
+                                                        </div>
+                                                </form>
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="col-xl-6">
+                                <div class="card mt-2">
+                                        <div class="card-body">
+                                                <h5 class="card-title">Ordered Products</h5>
+                                                <div app-table [headers]="['Name', 'Price', 'Quantity']">
+                                                        <tr *ngFor="let op of order.orderProducts">
+                                                                <td>{{op.stock.product.name}}</td>
+                                                                <td>{{op.stock.product.price}}
+                                                                </td>
+                                                                <td>{{op.quantity}}</td>
+                                                        </tr>
+                                                </div>
+                                        </div>
+                                        <div class="card-footer">
+                                                {{order.totalPrice | currency: 'EUR'}}
+                                        </div>
+                                </div>
+
+                        </div>
+                </div>
+        </div>
+        <div *ngIf="navtabs.isCurrentStep('Two')">
+                <p>Selected customer: {{order.customer ? order.customer.firstName : '' }}</p>
+                <customers (onSelectCustomer)="setSelectedCustomer($event)"></customers>
+        </div>
+
+        <div class="card-footer">
+                <button class="btn btn-warning" (click)="reset()">Reset</button>
+                <button class="btn btn-default" (click)="navtabs.previous()"
+                        *ngIf="!navtabs.isFirstStep()">Back</button>
+                <button class="btn btn-primary" (click)="navtabs.isLastStep() ? submit(): navtabs.next()"
+                        [textContent]="navtabs.getStepLabel()"></button>
+        </div>
+</div>

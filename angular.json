@@ -24,9 +24,12 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/@webcomponents/custom-elements/custom-elements.min.js",
+            ]
           },
           "configurations": {
             "production": {
@@ -120,6 +123,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "petshop-ui"
 }
